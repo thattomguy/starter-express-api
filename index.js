@@ -4,7 +4,11 @@ const axios = require('axios');
 const { parseString, Builder } = require('xml2js');
 
 // Signals from the Other Side endpoint
-app.all('/signals', async (req, res) => {
+app.all('/signals', (req, res) => {
+    res.redirect('/podcasts/signals');
+})
+
+app.all('/podcasts/signals', async (req, res) => {
     // console.log("Just got a request!")
     const url = 'https://podcasts.gtmanfred.com/podcasts/jasoncordova/podcast.xml';
 
@@ -32,8 +36,8 @@ app.all('/signals', async (req, res) => {
             const xmlBuilder = new Builder({ xmldec: { version: '1.0', encoding: 'UTF-8' } });
             const modifiedXml = xmlBuilder.buildObject(result);
 
-            res.set('Content-Type', 'text/xml');
-            res.send(modifiedXml);
+                res.set('Content-Type', 'text/xml');
+                res.send(modifiedXml);
         });
     } catch (error) {
         console.error('Error fetching XML:', error);
