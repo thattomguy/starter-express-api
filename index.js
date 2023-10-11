@@ -3,7 +3,7 @@ const app = express()
 const axios = require('axios');
 const { parseString, Builder } = require('xml2js');
 
-// Signals from the Other Side endpoint
+//-- Signals from the Other Side endpoint --//
 app.all('/signals', (req, res) => {
     res.redirect('/podcasts/signals');
 })
